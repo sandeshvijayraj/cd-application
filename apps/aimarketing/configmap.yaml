@@ -25,6 +25,7 @@ data:
   S3_BUCKET: "aimarketing-media"
   S3_REGION: "ap-south-1"
   S3_PRESIGN_EXPIRES: "3600"
+  # Empty = AWS S3 (keys in Secret). MinIO needs a full URL here.
   S3_ENDPOINT: ""
 
   NEXT_PUBLIC_GOOGLE_CLIENT_ID: ""
