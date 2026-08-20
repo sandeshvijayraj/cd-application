@@ -1,0 +1,41 @@
+# Non-secret settings only. Edit values here; Argo CD will sync them.
+# Secrets (API keys, passwords, JWT) live in Secret aimarketing-secrets — see secrets/README.md
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aimarketing-config
+  namespace: aimarketing
+data:
+  # --- public URLs (set to your node EIP / domain) ---
+  FRONTEND_PUBLIC_URL: "http://43.204.166.111:30080"
+  PUBLIC_API_BASE: "http://43.204.166.111:30800"
+  CORS_ORIGINS: "http://43.204.166.111:30080,http://43.204.166.111"
+  NEXTAUTH_URL: "http://43.204.166.111:30080"
+
+  # --- app behaviour ---
+  APP_ENV: "production"
+  AUTH_ALLOW_DEV_HEADERS: "0"
+  AUTH_TRUST_HOST: "true"
+  AGENT_MOCK_MODE: "0"
+
+  # --- service discovery (in-cluster) ---
+  API_REWRITE_TARGET: "http://backend:8000"
+  REDIS_URL: "redis://redis:6379/0"
+  POSTGRES_USER: "aimarketing"
+  POSTGRES_DB: "aimarketing"
+
+  # --- scheduler ---
+  SCHEDULER_INTERVAL_SEC: "300"
+  # API_BASE for scheduler pod
+  API_BASE: "http://backend:8000"
+
+  # --- S3 (bucket/region are ok in config; keys go in Secret) ---
+  S3_BUCKET: "aimarketing-media"
+  S3_REGION: "ap-south-1"
+  S3_PRESIGN_EXPIRES: "3600"
+  S3_ENDPOINT: ""
+
+  # --- public-ish Google client id (optional) ---
+  NEXT_PUBLIC_GOOGLE_CLIENT_ID: ""
+  GOOGLE_CLIENT_ID: ""
+  META_APP_ID: ""
