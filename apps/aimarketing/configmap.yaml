@@ -1,16 +1,16 @@
 # Non-secret settings only.
-# Google OAuth rejects bare IPs — use nip.io hostnames (free DNS → EIP).
-# Traefik is not installed on this node yet, so we keep NodePorts :30080 / :30800.
+# Google rejects bare IPs. Use the EC2 public DNS (*.amazonaws.com) — no bought domain.
+# Do NOT use *.compute.internal (VPC-only; Google/browsers outside VPC cannot use it).
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: aimarketing-config
   namespace: aimarketing
 data:
-  FRONTEND_PUBLIC_URL: "http://app.43.204.166.111.nip.io:30080"
-  PUBLIC_API_BASE: "http://api.43.204.166.111.nip.io:30800"
-  CORS_ORIGINS: "http://app.43.204.166.111.nip.io:30080,http://43.204.166.111:30080"
-  NEXTAUTH_URL: "http://app.43.204.166.111.nip.io:30080"
+  FRONTEND_PUBLIC_URL: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30080"
+  PUBLIC_API_BASE: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30800"
+  CORS_ORIGINS: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30080,http://43.204.166.111:30080"
+  NEXTAUTH_URL: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30080"
 
   APP_ENV: "production"
   AUTH_ALLOW_DEV_HEADERS: "0"
