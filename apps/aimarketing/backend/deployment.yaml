@@ -43,30 +43,3 @@ spec:
           secret:
             secretName: aimarketing-secrets
             optional: true
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend
-  namespace: aimarketing
-spec:
-  selector:
-    app: backend
-  ports:
-    - port: 8000
-      targetPort: 8000
-      name: http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-node
-  namespace: aimarketing
-spec:
-  type: NodePort
-  selector:
-    app: backend
-  ports:
-    - port: 8000
-      targetPort: 8000
-      nodePort: 30800

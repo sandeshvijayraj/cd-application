@@ -37,17 +37,3 @@ spec:
           secret:
             secretName: aimarketing-secrets
             optional: true
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend
-  namespace: aimarketing
-spec:
-  type: NodePort
-  selector:
-    app: frontend
-  ports:
-    - port: 80
-      targetPort: 3000
-      nodePort: 30080
