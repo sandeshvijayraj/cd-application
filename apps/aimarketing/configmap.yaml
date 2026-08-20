@@ -12,7 +12,6 @@ data:
 
   APP_ENV: "production"
   AUTH_ALLOW_DEV_HEADERS: "0"
-  AUTH_TRUST_HOST: "false"
   AGENT_MOCK_MODE: "0"
 
   API_REWRITE_TARGET: "http://backend:8000"
