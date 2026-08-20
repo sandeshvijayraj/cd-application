@@ -1,15 +1,12 @@
-# Public URLs (no purchased domain)
+# Public HTTPS (CloudFront)
 
-Google OAuth rejects bare IPs. Options:
+Stack: `aimarketing-cloudfront` (us-east-1)
 
-| Hostname | Usable for Google? |
-|----------|--------------------|
-| `43.204.166.111` | No |
-| `ip-….compute.internal` | No (VPC-only) |
-| `ec2-….compute.amazonaws.com` | Yes (AWS public DNS) |
-| Own domain (Route 53) | Yes (optional later) |
+| | URL |
+|--|-----|
+| App | https://da88yiprffut6.cloudfront.net |
+| Google redirect | https://da88yiprffut6.cloudfront.net/api/auth/callback/google |
+| Meta/Instagram redirect | https://da88yiprffut6.cloudfront.net/api/v1/integrations/meta/callback |
 
-## Current
-
-Frontend: http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30080  
-Backend: http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30800  
+Uses free default `*.cloudfront.net` certificate (no purchased domain).
+Origin = EC2 public DNS NodePorts. App NodePorts are open to the internet so CloudFront can fetch; SSH/Argo stay WiFi-locked.

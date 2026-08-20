@@ -1,16 +1,14 @@
-# Non-secret settings only.
-# Google rejects bare IPs. Use the EC2 public DNS (*.amazonaws.com) — no bought domain.
-# Do NOT use *.compute.internal (VPC-only; Google/browsers outside VPC cannot use it).
+# Non-secret settings. Public HTTPS via CloudFront (*.cloudfront.net).
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: aimarketing-config
   namespace: aimarketing
 data:
-  FRONTEND_PUBLIC_URL: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30080"
-  PUBLIC_API_BASE: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30800"
-  CORS_ORIGINS: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30080,http://43.204.166.111:30080"
-  NEXTAUTH_URL: "http://ec2-43-204-166-111.ap-south-1.compute.amazonaws.com:30080"
+  FRONTEND_PUBLIC_URL: "https://da88yiprffut6.cloudfront.net"
+  PUBLIC_API_BASE: "https://da88yiprffut6.cloudfront.net"
+  CORS_ORIGINS: "https://da88yiprffut6.cloudfront.net,http://43.204.166.111:30080"
+  NEXTAUTH_URL: "https://da88yiprffut6.cloudfront.net"
 
   APP_ENV: "production"
   AUTH_ALLOW_DEV_HEADERS: "0"
