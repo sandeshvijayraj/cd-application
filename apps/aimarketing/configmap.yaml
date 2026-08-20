@@ -1,16 +1,19 @@
 # Non-secret settings only. Edit values here; Argo CD will sync them.
 # Secrets (API keys, passwords, JWT) live in Secret aimarketing-secrets — see secrets/README.md
+#
+# Hostnames use nip.io (free DNS → EIP) because Google OAuth rejects bare IPs.
+# Later: buy a domain in Route 53 and replace these hosts.
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: aimarketing-config
   namespace: aimarketing
 data:
-  # --- public URLs (set to your node EIP / domain) ---
-  FRONTEND_PUBLIC_URL: "http://43.204.166.111:30080"
-  PUBLIC_API_BASE: "http://43.204.166.111:30800"
-  CORS_ORIGINS: "http://43.204.166.111:30080,http://43.204.166.111"
-  NEXTAUTH_URL: "http://43.204.166.111:30080"
+  # --- public URLs (nip.io → 43.204.166.111, Ingress on :80) ---
+  FRONTEND_PUBLIC_URL: "http://app.43.204.166.111.nip.io"
+  PUBLIC_API_BASE: "http://api.43.204.166.111.nip.io"
+  CORS_ORIGINS: "http://app.43.204.166.111.nip.io,http://43.204.166.111:30080"
+  NEXTAUTH_URL: "http://app.43.204.166.111.nip.io"
 
   # --- app behaviour ---
   APP_ENV: "production"
@@ -26,16 +29,14 @@ data:
 
   # --- scheduler ---
   SCHEDULER_INTERVAL_SEC: "300"
-  # API_BASE for scheduler pod
   API_BASE: "http://backend:8000"
 
-  # --- S3 (bucket/region are ok in config; keys go in Secret) ---
+  # --- S3 ---
   S3_BUCKET: "aimarketing-media"
   S3_REGION: "ap-south-1"
   S3_PRESIGN_EXPIRES: "3600"
   S3_ENDPOINT: ""
 
-  # --- public-ish Google client id (optional) ---
   NEXT_PUBLIC_GOOGLE_CLIENT_ID: ""
   GOOGLE_CLIENT_ID: ""
   META_APP_ID: ""

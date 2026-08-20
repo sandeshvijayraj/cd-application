@@ -1,0 +1,32 @@
+# Traefik (bundled with k3s) Ingress — hostnames via nip.io (Google OAuth needs a real TLD, not a bare IP).
+# app.43.204.166.111.nip.io → frontend
+# api.43.204.166.111.nip.io → backend
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aimarketing
+  namespace: aimarketing
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: app.43.204.166.111.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
+    - host: api.43.204.166.111.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 8000
