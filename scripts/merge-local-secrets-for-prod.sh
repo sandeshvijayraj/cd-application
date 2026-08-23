@@ -17,12 +17,19 @@ set -a
 source "$LOCAL_ENV"
 set +a
 
-POSTGRES_PW="${POSTGRES_PASSWORD:-aimarketing-prod-change-me}"
+POSTGRES_PW="${POSTGRES_PASSWORD:-}"
+if [[ -z "$POSTGRES_PW" ]]; then
+  echo "WARN: POSTGRES_PASSWORD not in $LOCAL_ENV — omitting DATABASE_URL from output." >&2
+  echo "      Keep existing DB secret on cluster or set POSTGRES_PASSWORD before apply." >&2
+  DB_BLOCK=""
+else
+  DB_BLOCK="POSTGRES_PASSWORD=${POSTGRES_PW}
+DATABASE_URL=postgresql+psycopg://aimarketing:${POSTGRES_PW}@postgres:5432/aimarketing"
+fi
 
 cat >"$OUT" <<EOF
 # Generated $(date -u +%Y-%m-%dT%H:%MZ) — do not commit
-POSTGRES_PASSWORD=${POSTGRES_PW}
-DATABASE_URL=postgresql+psycopg://aimarketing:${POSTGRES_PW}@postgres:5432/aimarketing
+${DB_BLOCK}
 
 AUTH_JWT_SECRET=${AUTH_JWT_SECRET:-}
 NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-}
