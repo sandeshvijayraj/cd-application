@@ -1,4 +1,6 @@
-# Optional: needs Traefik/nginx. Until then use NodePorts + AWS public DNS.
+# Traefik (bundled with k3s) Ingress — hostnames via nip.io (Google OAuth needs a real TLD, not a bare IP).
+# app.43.204.166.111.nip.io → frontend
+# api.43.204.166.111.nip.io → backend
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -8,7 +10,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: ec2-43-204-166-111.ap-south-1.compute.amazonaws.com
+    - host: app.43.204.166.111.nip.io
       http:
         paths:
           - path: /
@@ -18,3 +20,13 @@ spec:
                 name: frontend
                 port:
                   number: 80
+    - host: api.43.204.166.111.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 8000

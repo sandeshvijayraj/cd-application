@@ -1,4 +1,5 @@
 # Non-secret settings. Public HTTPS via CloudFront (*.cloudfront.net).
+# Secrets → aimarketing-secrets (see secrets/README.md).
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,6 +10,7 @@ data:
   PUBLIC_API_BASE: "https://da88yiprffut6.cloudfront.net"
   CORS_ORIGINS: "https://da88yiprffut6.cloudfront.net,http://43.204.166.111:30080"
   NEXTAUTH_URL: "https://da88yiprffut6.cloudfront.net"
+  AUTH_TRUST_HOST: "true"
 
   APP_ENV: "production"
   AUTH_ALLOW_DEV_HEADERS: "0"
@@ -19,15 +21,54 @@ data:
   POSTGRES_USER: "aimarketing"
   POSTGRES_DB: "aimarketing"
 
-  SCHEDULER_INTERVAL_SEC: "300"
+  # Platform worker (scheduler pod)
+  SCHEDULER_INTERVAL_SEC: "15"
+  WORKER_INTERVAL_SEC: "15"
+  WORKER_JOB_BATCH: "3"
   API_BASE: "http://backend:8000"
 
+  # v2 orchestration + models (non-secret names)
+  DEFAULT_ORCHESTRATION_VERSION: "2"
+  GEMINI_TEXT_MODEL: "gemini-3.1-pro-preview"
+  GEMINI_IMAGE_MODEL_PRO: "gemini-3-pro-image-preview"
+  GEMINI_IMAGE_MODEL_LITE: "gemini-3.1-flash-image"
+  GEMINI_IMAGE_MODEL: "gemini-3.1-flash-image"
+  GEMINI_ENABLE_SEARCH_GROUNDING: "1"
+  OPENROUTER_BASE_URL: "https://openrouter.ai/api/v1"
+  OPENROUTER_MODEL_NARRATIVE: "anthropic/claude-opus-4"
+  OPENROUTER_MODEL_STEP_DECISION: "anthropic/claude-opus-4"
+  OPENROUTER_HTTP_REFERER: "https://da88yiprffut6.cloudfront.net"
+  OPENROUTER_APP_TITLE: "AI Marketing SME"
+  HEALTH_CHECK_INTERVAL_HOURS: "6"
+
+  # Product video — lite→Veo, pro→Kling (auto)
+  ENABLE_PRODUCT_VIDEO: "1"
+  VIDEO_PROVIDER: "auto"
+  GOOGLE_VIDEO_MODEL: "veo-3.1-lite-generate-preview"
+  GOOGLE_VIDEO_MODEL_PRO: "veo-3.1-fast-generate-preview"
+  GOOGLE_VIDEO_MODEL_LITE: "veo-3.1-lite-generate-preview"
+  OPENROUTER_VIDEO_MODEL: "kwaivgi/kling-v3.0-std"
+  MAX_PRODUCT_VIDEO_SEC: "30"
+  DEFAULT_CONTENT_QUALITY: "lite"
+
+  # Research
+  ENABLE_LIVE_WEB_RESEARCH: "1"
+  ENABLE_SCHEDULED_RESEARCH: "0"
+  ENABLE_MARKET_RESEARCH: "0"
+
+  # Media — AWS S3 (keys in Secret)
   S3_BUCKET: "aimarketing-media"
   S3_REGION: "ap-south-1"
   S3_PRESIGN_EXPIRES: "3600"
-  # Empty = AWS S3 (keys in Secret). MinIO needs a full URL here.
   S3_ENDPOINT: ""
+
+  # Meta (app id is non-secret; secrets in aimarketing-secrets)
+  META_APP_ID: "2220292275202715"
+  META_IG_APP_ID: "1239840174896035"
+  META_GRAPH_VERSION: "v21.0"
+  META_OAUTH_REDIRECT_URI: "https://da88yiprffut6.cloudfront.net/api/v1/integrations/meta/callback"
+  META_EXTRA_SCOPES: "instagram_business_manage_insights"
+  META_ADS_SCOPES: "public_profile,email,business_management,ads_read,ads_management,pages_show_list,pages_read_engagement,pages_manage_ads,pages_manage_metadata,pages_manage_posts,pages_read_user_content"
 
   NEXT_PUBLIC_GOOGLE_CLIENT_ID: ""
   GOOGLE_CLIENT_ID: ""
-  META_APP_ID: ""
