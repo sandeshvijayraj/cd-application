@@ -19,13 +19,13 @@ spec:
         - name: ecr-pull
       containers:
         - name: scheduler
-          image: 788612735038.dkr.ecr.ap-south-1.amazonaws.com/aimarketing-scheduler:v0.1.6
+          image: 788612735038.dkr.ecr.ap-south-1.amazonaws.com/aimarketing-scheduler:v0.1.7
           imagePullPolicy: Always
           envFrom:
-            - configMapRef:
-                name: aimarketing-config
             - secretRef:
                 name: aimarketing-secrets
+            - configMapRef:
+                name: aimarketing-config
           volumeMounts:
             - name: secrets-files
               mountPath: /etc/aimarketing/secrets

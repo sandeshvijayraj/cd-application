@@ -19,15 +19,16 @@ spec:
         - name: ecr-pull
       containers:
         - name: backend
-          image: 788612735038.dkr.ecr.ap-south-1.amazonaws.com/aimarketing-backend:v0.1.6
+          image: 788612735038.dkr.ecr.ap-south-1.amazonaws.com/aimarketing-backend:v0.1.7
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
           envFrom:
-            - configMapRef:
-                name: aimarketing-config
+            # Secret first, then ConfigMap — ConfigMap wins for PUBLIC_API_BASE / URLs.
             - secretRef:
                 name: aimarketing-secrets
+            - configMapRef:
+                name: aimarketing-config
           volumeMounts:
             - name: secrets-files
               mountPath: /etc/aimarketing/secrets

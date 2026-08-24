@@ -1,5 +1,7 @@
 # Non-secret settings. Public HTTPS via CloudFront (*.cloudfront.net).
 # Secrets → aimarketing-secrets (see secrets/README.md).
+# Meta OAuth redirect = {PUBLIC_API_BASE}/api/v1/integrations/meta/callback
+# (do not put URL keys in the Secret — ConfigMap is loaded after Secret and wins).
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -11,10 +13,13 @@ data:
   CORS_ORIGINS: "https://da88yiprffut6.cloudfront.net,http://43.204.166.111:30080"
   NEXTAUTH_URL: "https://da88yiprffut6.cloudfront.net"
   AUTH_TRUST_HOST: "true"
+  NEXTAUTH_DEBUG: "1"
+  AUTH_DEBUG: "1"
 
   APP_ENV: "production"
   AUTH_ALLOW_DEV_HEADERS: "0"
   AGENT_MOCK_MODE: "0"
+  LOG_LEVEL: "DEBUG"
 
   API_REWRITE_TARGET: "http://backend:8000"
   REDIS_URL: "redis://redis:6379/0"
@@ -63,10 +68,12 @@ data:
   S3_ENDPOINT: ""
 
   # Meta (app id is non-secret; secrets in aimarketing-secrets)
+  # Redirect URI is derived from PUBLIC_API_BASE — do not set META_OAUTH_REDIRECT_URI here
+  # unless you intentionally override. Register in Meta:
+  #   https://da88yiprffut6.cloudfront.net/api/v1/integrations/meta/callback
   META_APP_ID: "2220292275202715"
   META_IG_APP_ID: "1239840174896035"
   META_GRAPH_VERSION: "v21.0"
-  META_OAUTH_REDIRECT_URI: "https://da88yiprffut6.cloudfront.net/api/v1/integrations/meta/callback"
   META_EXTRA_SCOPES: "instagram_business_manage_insights"
   META_ADS_SCOPES: "public_profile,email,business_management,ads_read,ads_management,pages_show_list,pages_read_engagement,pages_manage_ads,pages_manage_metadata,pages_manage_posts,pages_read_user_content"
 
