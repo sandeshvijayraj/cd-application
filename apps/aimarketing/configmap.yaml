@@ -27,13 +27,14 @@ data:
   POSTGRES_DB: "aimarketing"
 
   # Platform worker (scheduler pod)
-  SCHEDULER_INTERVAL_SEC: "15"
-  WORKER_INTERVAL_SEC: "15"
+  SCHEDULER_INTERVAL_SEC: "10"
+  WORKER_INTERVAL_SEC: "10"
   WORKER_JOB_BATCH: "3"
+  WORKER_MAX_RUNNING_JOBS: "100"
   API_BASE: "http://backend:8000"
 
-  # v2 orchestration + models (non-secret names)
-  DEFAULT_ORCHESTRATION_VERSION: "2"
+  # v3 orchestration + models (non-secret names)
+  DEFAULT_ORCHESTRATION_VERSION: "3"
   GEMINI_TEXT_MODEL: "gemini-3.1-pro-preview"
   GEMINI_IMAGE_MODEL_PRO: "gemini-3-pro-image-preview"
   GEMINI_IMAGE_MODEL_LITE: "gemini-3.1-flash-image"
