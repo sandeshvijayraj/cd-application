@@ -47,13 +47,13 @@ data:
   OPENROUTER_APP_TITLE: "AI Marketing SME"
   HEALTH_CHECK_INTERVAL_HOURS: "6"
 
-  # Product video — lite→Veo, pro→Kling (auto)
+  # Product video — lite+pro → Seedance 2.5 (OpenRouter). Lite=480p; pro=720p+audio.
   ENABLE_PRODUCT_VIDEO: "1"
   VIDEO_PROVIDER: "auto"
   GOOGLE_VIDEO_MODEL: "veo-3.1-lite-generate-preview"
   GOOGLE_VIDEO_MODEL_PRO: "veo-3.1-fast-generate-preview"
   GOOGLE_VIDEO_MODEL_LITE: "veo-3.1-lite-generate-preview"
-  OPENROUTER_VIDEO_MODEL: "kwaivgi/kling-v3.0-std"
+  OPENROUTER_VIDEO_MODEL: "bytedance/seedance-2.5"
   MAX_PRODUCT_VIDEO_SEC: "30"
   DEFAULT_CONTENT_QUALITY: "lite"
 
