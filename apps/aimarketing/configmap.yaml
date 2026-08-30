@@ -47,15 +47,24 @@ data:
   OPENROUTER_APP_TITLE: "AI Marketing SME"
   HEALTH_CHECK_INTERVAL_HOURS: "6"
 
-  # Product video — lite+pro → Seedance 2.5 (OpenRouter). Lite=480p; pro=720p+audio.
+  # Product video — lite=Veo 3.1 generate (Google); pro=Kling v3.0-std (OpenRouter, fast).
+  # (Kling 2.5 / Veo 3.0 not available — closest current models.)
   ENABLE_PRODUCT_VIDEO: "1"
   VIDEO_PROVIDER: "auto"
-  GOOGLE_VIDEO_MODEL: "veo-3.1-lite-generate-preview"
-  GOOGLE_VIDEO_MODEL_PRO: "veo-3.1-fast-generate-preview"
-  GOOGLE_VIDEO_MODEL_LITE: "veo-3.1-lite-generate-preview"
-  OPENROUTER_VIDEO_MODEL: "bytedance/seedance-2.5"
+  GOOGLE_VIDEO_MODEL: "veo-3.1-generate-preview"
+  GOOGLE_VIDEO_MODEL_PRO: "veo-3.1-generate-preview"
+  GOOGLE_VIDEO_MODEL_LITE: "veo-3.1-generate-preview"
+  OPENROUTER_VIDEO_MODEL: "kwaivgi/kling-v3.0-std"
+  OPENROUTER_VIDEO_MODEL_PRO: "kwaivgi/kling-v3.0-std"
   MAX_PRODUCT_VIDEO_SEC: "30"
   DEFAULT_CONTENT_QUALITY: "lite"
+  # Kling poll wall-clock (seconds per clip)
+  OPENROUTER_VIDEO_POLL_TIMEOUT_SEC: "900"
+  OPENROUTER_VIDEO_POLL_INTERVAL_SEC: "5"
+  # Longer agent replies / HTTP waits (raise if plans truncate or agents time out)
+  LLM_HTTP_TIMEOUT_SEC: "120"
+  GEMINI_HTTP_TIMEOUT_SEC: "180"
+  AGENT_MAX_TOKENS_MULTIPLIER: "1.0"
 
   # Research
   ENABLE_LIVE_WEB_RESEARCH: "1"
