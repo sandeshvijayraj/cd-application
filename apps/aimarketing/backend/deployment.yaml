@@ -19,7 +19,7 @@ spec:
         - name: ecr-pull
       containers:
         - name: backend
-          image: 788612735038.dkr.ecr.ap-south-1.amazonaws.com/aimarketing-backend:v0.1.66
+          image: 788612735038.dkr.ecr.ap-south-1.amazonaws.com/aimarketing-backend:v0.1.69
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
