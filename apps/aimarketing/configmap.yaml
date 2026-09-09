@@ -47,13 +47,12 @@ data:
   OPENROUTER_APP_TITLE: "AI Marketing SME"
   HEALTH_CHECK_INTERVAL_HOURS: "6"
 
-  # Product video — lite=Veo 3.1 generate (Google); pro=Kling v3.0-std (OpenRouter, fast).
-  # (Kling 2.5 / Veo 3.0 not available — closest current models.)
+  # Product video — Google Veo 3.1 Fast (~$0.10/s) for both lite aliases; pro quality → Kling when enabled.
   ENABLE_PRODUCT_VIDEO: "1"
   VIDEO_PROVIDER: "auto"
-  GOOGLE_VIDEO_MODEL: "veo-3.1-generate-preview"
-  GOOGLE_VIDEO_MODEL_PRO: "veo-3.1-generate-preview"
-  GOOGLE_VIDEO_MODEL_LITE: "veo-3.1-generate-preview"
+  GOOGLE_VIDEO_MODEL: "veo-3.1-fast-generate-preview"
+  GOOGLE_VIDEO_MODEL_PRO: "veo-3.1-fast-generate-preview"
+  GOOGLE_VIDEO_MODEL_LITE: "veo-3.1-fast-generate-preview"
   OPENROUTER_VIDEO_MODEL: "kwaivgi/kling-v3.0-std"
   OPENROUTER_VIDEO_MODEL_PRO: "kwaivgi/kling-v3.0-std"
   MAX_PRODUCT_VIDEO_SEC: "30"
